@@ -61,12 +61,13 @@ app.put('/users/:id', async(req, res) => {
     }
 })
 
-app.put('/challenge',async(req, res) => {
+app.post('/challenge/add',async(req, res) => {
  
-  //let mode=req.body.mode;
+  let mode=req.body;
   try {
-    const ch = await challenge.find();
-    res.json(ch);
+    //const ch = await challenge.find();
+    const s=await challenge.create(mode)
+    res.json(s);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Internal server error' });
@@ -74,6 +75,22 @@ app.put('/challenge',async(req, res) => {
 
 
 });
+app.post('/challenge',async(req, res) => {
+ 
+  let mode1=req.body.mode;
+  try {
+    const data = await challenge.find({mode:mode1});
+    const randomIndex = Math.floor(Math.random() * data.length);
+    res.json(data[randomIndex]);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+
+
+});
+
+
 
 app.use(cors())
 app.listen(port,()=>{
