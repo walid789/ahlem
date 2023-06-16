@@ -1,28 +1,30 @@
 const mongoose = require('mongoose');
 const challengeSchema =new  mongoose.Schema({
- 
-mode: {
+    
+    id: {
+        type: String , 
+        require : true 
+    }, 
+    title: {
     type: String , 
     require : true 
 }, 
-text:{
+description:{
     type: String, 
     require: true, 
 }, 
-
-
-word1:{
+createdAt:{
     type:String , 
     require: true, 
 },
-word2:{
+mode:{
     type:String , 
     require: true, 
 },
-word3:{
-    type:String , 
+duration:{
+    type:Number,
     require: true, 
-},
+}
 
 });
 
